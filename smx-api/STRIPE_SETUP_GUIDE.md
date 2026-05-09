@@ -73,7 +73,7 @@ Secret key: sk_live_...
    - `all of payment_intent actions`
 5. Click **Add endpoint**
 
-6. Click **Signing secret** Copy the **Webhook signing secret** (starts with `whsec_`, like whsec_VqoBBDTPfW8v1RzJ4kBaVdnEDVmm3qxZ)
+6. Click **Signing secret** Copy the **Webhook signing secret** (starts with `whsec_`)
 
 ## ⚙️ Backend Configuration (smx-api)
 
