@@ -1,7 +1,5 @@
 # SourceMedX
 
-## About the product
-
 **SourceMedX** is an **AI-powered** global B2B medical device sourcing platform—*accessible, simple, and transparent*. Instead of static catalogs and manual triage, the product treats **natural language as the primary interface**: buyers describe what they need in their own words, and the system maps that intent to retrieval, comparison, and narrative reporting across the medical-device domain.
 
 **How the AI-powered tooling is used**
