@@ -1,0 +1,15 @@
+export const genericWords = new Set([
+  'device',
+  'devices',
+  'medical',
+  'equipment',
+  'equipments',
+  'product',
+  'products',
+  'tool',
+  'tools',
+  'system',
+  'systems',
+  'connection',
+  'connections',
+])

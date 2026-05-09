@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+    font-family: Apercu Pro, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.25;
+    font-weight: 400;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    min-height: 100vh;
+    min-width: 320px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    font-family: Apercu Pro, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+
+.is-invalid {
+    color: #f44336;
+    border-color: #f44336;
+}
+
+.is-invalid > * {
+    border-color: #f44336;
+}
+.faq-answer {
+    transition: all 0.3s;
+}

@@ -1,0 +1,1855 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/admin": {
+      "post": {
+        "operationId": "AdminController_createAdmin",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Admin user successfully created.",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "role": {
+                  "$ref": "#/components/schemas/AdminRole"
+                },
+                "isActive": {
+                  "type": "boolean"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - validation error."
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new admin user",
+        "tags": [
+          "Admin"
+        ]
+      },
+      "get": {
+        "operationId": "AdminController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all admin users.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "$ref": "#/components/schemas/AdminRole"
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdminUser"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all admin users",
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/{id}": {
+      "get": {
+        "operationId": "AdminController_findById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin user found."
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          },
+          "404": {
+            "description": "Admin user not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get an admin user by ID",
+        "tags": [
+          "Admin"
+        ]
+      },
+      "put": {
+        "operationId": "AdminController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Admin user successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          },
+          "404": {
+            "description": "Admin user not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update an admin user",
+        "tags": [
+          "Admin"
+        ]
+      },
+      "delete": {
+        "operationId": "AdminController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin user successfully deleted."
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          },
+          "404": {
+            "description": "Admin user not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete an admin user",
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/{id}/toggle-block": {
+      "put": {
+        "operationId": "AdminController_toggleBlock",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The admin block status has been successfully toggled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUser"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          },
+          "404": {
+            "description": "Admin not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Toggle block status of an admin user",
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/admin/test/error-handling": {
+      "get": {
+        "operationId": "AdminController_testErrorHandling",
+        "parameters": [],
+        "responses": {
+          "400": {
+            "description": "Bad request - demonstration of error handling."
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Test endpoint for error handling",
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/activity-logs": {
+      "get": {
+        "operationId": "ActivityLogsController_findAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (default: 1)",
+            "schema": {
+              "minimum": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page (default: 10)",
+            "schema": {
+              "minimum": 1,
+              "example": 10,
+              "type": "number"
+            }
+          },
+          {
+            "name": "adminId",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by admin ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by entity type",
+            "schema": {
+              "enum": [
+                "ADMIN",
+                "USER",
+                "ROLE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "activityType",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by activity type",
+            "schema": {
+              "enum": [
+                "CREATE",
+                "UPDATE",
+                "DELETE",
+                "BLOCK",
+                "UNBLOCK",
+                "LOGIN",
+                "LOGOUT"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of activity logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedActivityLogsResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get activity logs with pagination and filters",
+        "tags": [
+          "Activity Logs"
+        ]
+      }
+    },
+    "/activity-logs/export": {
+      "get": {
+        "operationId": "ActivityLogsController_exportLogs",
+        "parameters": [
+          {
+            "name": "adminId",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by admin ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by entity type",
+            "schema": {
+              "enum": [
+                "ADMIN",
+                "USER",
+                "ROLE"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "activityType",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs by activity type",
+            "schema": {
+              "enum": [
+                "CREATE",
+                "UPDATE",
+                "DELETE",
+                "BLOCK",
+                "UNBLOCK",
+                "LOGIN",
+                "LOGOUT"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs from this date (ISO format)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "Filter logs until this date (ISO format)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity logs exported successfully",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - insufficient permissions"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Export activity logs as CSV",
+        "tags": [
+          "Activity Logs"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "summary": "Admin login with email and password",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token refreshed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid refresh token"
+          }
+        },
+        "summary": "Refresh access token using refresh token",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully logged out"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Logout and revoke all refresh tokens",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/auth/sessions": {
+      "get": {
+        "operationId": "AuthController_getActiveSessions",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of active sessions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "userAgent": {
+                        "type": "string"
+                      },
+                      "ipAddress": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "expiresAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all active sessions for the current admin",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/auth/sessions/{tokenId}": {
+      "delete": {
+        "operationId": "AuthController_revokeSession",
+        "parameters": [
+          {
+            "name": "tokenId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Session revoked successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Session not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Revoke a specific session",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "operationId": "AuthController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns the current admin profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "isActive": {
+                      "type": "boolean"
+                    },
+                    "roleName": {
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "type": "[string]"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current admin profile",
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "UsersController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The user has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - validation error."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new user",
+        "tags": [
+          "Users"
+        ]
+      },
+      "get": {
+        "operationId": "UsersController_findAll",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number (default: 1)",
+            "schema": {
+              "minimum": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Number of items per page (default: 10)",
+            "schema": {
+              "minimum": 1,
+              "example": 10,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all users with pagination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all users",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UsersController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to retrieve",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user has been found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a user by ID",
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "operationId": "UsersController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to update",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The user has been successfully updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - validation error."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a user",
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "operationId": "UsersController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to delete",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user has been successfully deleted."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a user",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/{id}/toggle-block": {
+      "put": {
+        "operationId": "UsersController_toggleBlockStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to toggle block status",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user block status has been successfully toggled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Toggle user block status",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/users/{id}/toggle-role": {
+      "put": {
+        "operationId": "UsersController_toggleRole",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "The ID of the user to toggle role",
+            "schema": {
+              "example": "123e4567-e89b-12d3-a456-426614174000",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user role has been successfully toggled.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Toggle user role between buyer and supplier",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/search-keys/stats": {
+      "get": {
+        "operationId": "SearchKeysController_getStats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns search key statistics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchKeyStatsResponse"
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example statistics response",
+                    "value": {
+                      "total": 100,
+                      "available": 50,
+                      "used": 30,
+                      "expired": 15,
+                      "cancelled": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get search key statistics",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/all": {
+      "get": {
+        "operationId": "SearchKeysController_getAllKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns paginated search keys",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedSearchKeysResponse"
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example paginated search keys response",
+                    "value": {
+                      "keys": [
+                        {
+                          "id": "123e4567-e89b-12d3-a456-426614174000",
+                          "key": "abc123def456",
+                          "status": "AVAILABLE",
+                          "expiresAt": "2024-12-31T23:59:59Z",
+                          "isUsed": false,
+                          "usedAt": null,
+                          "price": 10,
+                          "discountApplied": 5,
+                          "stripePaymentId": "pi_1234567890",
+                          "createdAt": "2024-01-01T00:00:00Z",
+                          "updatedAt": "2024-01-01T00:00:00Z"
+                        }
+                      ],
+                      "total": 50
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all search keys with pagination and filtering",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/user/{userId}": {
+      "get": {
+        "operationId": "SearchKeysController_getKeysByUser",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns user's search keys",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchKey"
+                  }
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example user search keys response",
+                    "value": [
+                      {
+                        "id": "123e4567-e89b-12d3-a456-426614174000",
+                        "key": "abc123def456",
+                        "status": "AVAILABLE",
+                        "expiresAt": "2024-12-31T23:59:59Z",
+                        "isUsed": false,
+                        "usedAt": null,
+                        "price": 10,
+                        "discountApplied": 5,
+                        "stripePaymentId": "pi_1234567890",
+                        "createdAt": "2024-01-01T00:00:00Z",
+                        "updatedAt": "2024-01-01T00:00:00Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all search keys for a specific user",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/cancel/{keyId}": {
+      "post": {
+        "operationId": "SearchKeysController_cancelKey",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search key cancelled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchKey"
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example cancelled search key response",
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174000",
+                      "key": "abc123def456",
+                      "status": "CANCELLED",
+                      "expiresAt": "2024-12-31T23:59:59Z",
+                      "isUsed": false,
+                      "usedAt": null,
+                      "price": 10,
+                      "discountApplied": 5,
+                      "stripePaymentId": "pi_1234567890",
+                      "createdAt": "2024-01-01T00:00:00Z",
+                      "updatedAt": "2024-01-01T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Cancel a search key",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/purchases": {
+      "get": {
+        "operationId": "SearchKeysController_getAllPurchases",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns all purchases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/"
+                  }
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example purchases response",
+                    "value": [
+                      {
+                        "stripePaymentId": "pi_1234567890",
+                        "count": 3,
+                        "totalPrice": 30,
+                        "totalDiscount": 5,
+                        "createdAt": "2024-01-01T00:00:00Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all purchases grouped by stripePaymentId",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/stats-by-user": {
+      "get": {
+        "operationId": "SearchKeysController_getAllKeyStatsByUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns all search keys stats by user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example stats by user response",
+                    "value": [
+                      {
+                        "stats": {
+                          "total": 10,
+                          "available": 5,
+                          "used": 3,
+                          "expired": 1,
+                          "cancelled": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all search keys stats by user",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    },
+    "/search-keys/payment-details/{stripePaymentId}": {
+      "get": {
+        "operationId": "SearchKeysController_getPaymentDetails",
+        "parameters": [
+          {
+            "name": "stripePaymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns payment details by stripePaymentId",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/"
+                },
+                "examples": {
+                  "Example Response": {
+                    "summary": "Example payment details response",
+                    "value": {
+                      "paymentStatus": "succeeded",
+                      "paymentAmount": 100,
+                      "paymentCurrency": "USD",
+                      "paymentReceiptUrl": "https://example.com/receipt",
+                      "paymentCreated": 1718851200
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get payment details by stripePaymentId",
+        "tags": [
+          "search-keys"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Admin Dashboard API",
+    "description": "The Admin Dashboard API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "CreateAdminDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the admin",
+            "example": "johndoe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the admin",
+            "example": "john.doe@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "The password for the admin account",
+            "example": "StrongP@ssw0rd123",
+            "minLength": 8
+          },
+          "roleName": {
+            "type": "string",
+            "description": "the role to assign to the admin",
+            "example": "SUPPORT"
+          }
+        },
+        "required": [
+          "username",
+          "email",
+          "password",
+          "roleName"
+        ]
+      },
+      "AdminUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the admin user",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the admin user",
+            "example": "johndoe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the admin user",
+            "example": "john.doe@example.com"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the admin user is active",
+            "example": true
+          },
+          "role": {
+            "description": "The role assigned to the admin user",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdminRole"
+              }
+            ]
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the admin user was created",
+            "example": "2024-03-06T21:22:03.123Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the admin user was last updated",
+            "example": "2024-03-06T21:22:03.123Z"
+          },
+          "lastLoginAt": {
+            "type": "object",
+            "description": "The date and time when the admin user was last logged in",
+            "example": "2024-03-06T21:22:03.123Z"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "email",
+          "isActive",
+          "role",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AdminRole": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the role",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the role",
+            "example": "SUPER_ADMIN"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the role",
+            "example": "Has full access to all admin features"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "The list of permissions assigned to this role",
+            "example": [
+              "VIEW_ADMINS",
+              "CREATE_ADMINS"
+            ],
+            "items": {
+              "type": "string",
+              "enum": [
+                "VIEW_ADMINS",
+                "CREATE_ADMINS",
+                "UPDATE_ADMINS",
+                "DELETE_ADMINS",
+                "BLOCK_ADMINS",
+                "VIEW_LOGS",
+                "EXPORT_LOGS"
+              ]
+            }
+          },
+          "admins": {
+            "description": "The list of admins assigned to this role",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUser"
+            }
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the role was created",
+            "example": "2024-03-06T21:22:03.123Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the role was last updated",
+            "example": "2024-03-06T21:22:03.123Z"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "description",
+          "permissions",
+          "admins",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateAdminDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "The username of the admin",
+            "example": "johndoe"
+          },
+          "roleName": {
+            "type": "string",
+            "description": "the role to assign to the admin",
+            "example": "SUPPORT"
+          }
+        },
+        "required": [
+          "username",
+          "roleName"
+        ]
+      },
+      "ActivityLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the activity log",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "admin": {
+            "description": "The admin user who performed the action",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdminUser"
+              }
+            ]
+          },
+          "activityType": {
+            "type": "string",
+            "description": "The type of activity performed",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "DELETE",
+              "BLOCK",
+              "UNBLOCK",
+              "LOGIN",
+              "LOGOUT"
+            ],
+            "example": "CREATE"
+          },
+          "entityType": {
+            "type": "string",
+            "description": "The type of entity that was affected",
+            "enum": [
+              "ADMIN",
+              "USER",
+              "ROLE"
+            ],
+            "example": "ADMIN"
+          },
+          "entityId": {
+            "type": "string",
+            "description": "The ID of the entity that was affected",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional details about the activity",
+            "example": {
+              "username": "johndoe",
+              "email": "john.doe@example.com"
+            }
+          },
+          "ipAddress": {
+            "type": "string",
+            "description": "The IP address from which the activity was performed",
+            "example": "192.168.1.1"
+          },
+          "userAgent": {
+            "type": "string",
+            "description": "The user agent of the device from which the activity was performed",
+            "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the activity was logged",
+            "example": "2024-03-06T21:22:03.123Z"
+          }
+        },
+        "required": [
+          "id",
+          "admin",
+          "activityType",
+          "entityType",
+          "entityId",
+          "details",
+          "ipAddress",
+          "userAgent",
+          "createdAt"
+        ]
+      },
+      "PaginatedActivityLogsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityLog"
+            }
+          },
+          "total": {
+            "type": "number",
+            "example": 100
+          },
+          "page": {
+            "type": "number",
+            "example": 1
+          },
+          "limit": {
+            "type": "number",
+            "example": 10
+          },
+          "totalPages": {
+            "type": "number",
+            "example": 10
+          }
+        },
+        "required": [
+          "items",
+          "total",
+          "page",
+          "limit",
+          "totalPages"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the admin",
+            "example": "admin@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "The password for the admin account",
+            "example": "Admin123"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "RefreshTokenDto": {
+        "type": "object",
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "description": "The refresh token obtained during login",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        },
+        "required": [
+          "refresh_token"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John",
+            "minLength": 2
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe",
+            "minLength": 2
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user",
+            "example": "johndoe",
+            "minLength": 4
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user",
+            "example": "john.doe@example.com"
+          },
+          "company": {
+            "type": "string",
+            "description": "The company of the user",
+            "example": "apple"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the user",
+            "example": "BUYER"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "username",
+          "email",
+          "role"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the user",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user",
+            "example": "johndoe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user",
+            "example": "john.doe@example.com"
+          },
+          "company": {
+            "type": "string",
+            "description": "The company of the user",
+            "example": "apple"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the user",
+            "enum": [
+              "BUYER",
+              "SUPPLIER"
+            ],
+            "example": "BUYER"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the user is active",
+            "example": true
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the user was created",
+            "example": "2024-03-06T21:22:03.123Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date and time when the user was last updated",
+            "example": "2024-03-06T21:22:03.123Z"
+          },
+          "lastLoginAt": {
+            "type": "object",
+            "description": "The date and time when the user last logged in",
+            "example": "2024-03-06T21:22:03.123Z"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "email",
+          "role",
+          "isActive",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John",
+            "minLength": 2
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe",
+            "minLength": 2
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user",
+            "example": "johndoe",
+            "minLength": 4
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the user",
+            "example": "BUYER"
+          },
+          "company": {
+            "type": "string",
+            "description": "The company of the user",
+            "example": "apple"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "username",
+          "role"
+        ]
+      },
+      "SearchKey": {
+        "type": "object",
+        "properties": {}
+      },
+      "SearchKeyStatsResponse": {
+        "type": "object",
+        "properties": {}
+      },
+      "PaginatedSearchKeysResponse": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}
