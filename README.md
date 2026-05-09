@@ -2,27 +2,32 @@
 
 ## About the product
 
-**SourceMedX** is a global B2B medical device sourcing platform—positioned as *accessible, simple, and transparent*. It connects verified suppliers and active buyers through a secure, discrete matchmaking experience.
+**SourceMedX** is an **AI-powered** global B2B medical device sourcing platform—*accessible, simple, and transparent*. Instead of static catalogs and manual triage, the product treats **natural language as the primary interface**: buyers describe what they need in their own words, and the system maps that intent to retrieval, comparison, and narrative reporting across the medical-device domain.
 
-The platform is described as a next-generation sourcing hub: it aggregates information from multiple data sources to support supplier and buyer profiles, and matches participants based on natural-language (prompt) requests—not only static keyword searches.
+**How the AI-powered tooling is used**
+
+- **Intent over keywords** — Prompts are interpreted in context so teams are not limited to exact product codes or boolean search strings.
+- **Grounded, multi-source intelligence** — AI-assisted workflows pull together supplier surfaces, industry directories, and regulatory references (for example FDA and EUDAMED) so answers reflect **structured compliance and audit signals**, not generic web blurbs.
+- **Synthesis, not just links** — The platform is built to produce **actionable reports**: condensed supplier intelligence and due-diligence-oriented views that shorten cycles from weeks to hours.
+- **Built for this domain** — Unlike general-purpose chatbots, the stack is aimed at **medical device sourcing**: regulatory nuance, verified supplier networks, and procurement-grade outputs in one secure workflow.
 
 **What buyers use it for**
 
-- Prompt-based search across supplier websites, industry directories, and regulatory databases (for example FDA and EUDAMED) in one workflow.
-- Actionable reports that combine supplier intelligence with regulatory and audit due diligence so teams can shorten sourcing cycles from weeks to hours.
-- Access to a verified network of registered, pre-vetted suppliers and reporting that supports informed procurement decisions.
+- **AI-assisted, prompt-driven search** across websites, directories, and regulatory databases in one place.
+- **AI-generated reports** that combine supplier intelligence with regulatory and audit due diligence for faster, better-informed decisions.
+- Access to a **verified** supplier network and reporting that supports serious procurement—not anonymous listings.
 
-Compared with generic sourcing listings or general-purpose AI chatbots, SourceMedX is purpose-built for medical devices: specialized regulatory data, supplier-focused intelligence, and compliance-oriented reporting in a single platform. Public messaging also previews future supplier-side visibility and advertising tools; see the marketing site for the current roadmap.
+Public messaging also previews future **supplier-side** visibility and advertising tools; see the marketing site for the current roadmap.
 
 ## Repository layout
 
 
-| Directory                     | Description                                                                                                     |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| [smx-frontend](smx-frontend/) | Main product UI — **Next.js 15** (App Router, React 19, Tailwind).                                              |
-| [smx-api](smx-api/)           | Backend API — **Express**, **TypeORM**, **PostgreSQL**, **Redis**, **Socket.IO**, AI/email/Stripe integrations. |
-| [smx-admin](smx-admin/)       | Internal admin dashboard — **NestJS** backend and **React** (CRA) frontend.                                     |
-| [smx-site](smx-site/)         | Marketing / static site assets — **Tailwind CSS** CLI build.                                                    |
+| Directory                     | Description                                                                                                                                                |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [smx-frontend](smx-frontend/) | Main product UI — **Next.js 15** (App Router, React 19, Tailwind).                                                                                         |
+| [smx-api](smx-api/)           | Backend API — **Express**, **TypeORM**, **PostgreSQL**, **Redis**, **Socket.IO**; **LangChain** / LLM integrations for AI workflows; email and **Stripe**. |
+| [smx-admin](smx-admin/)       | Internal admin dashboard — **NestJS** backend and **React** (CRA) frontend.                                                                                |
+| [smx-site](smx-site/)         | Marketing / static site assets — **Tailwind CSS** CLI build.                                                                                               |
 
 
 Package-specific setup, scripts, and API docs live in each folder’s own README (for example `smx-api/README.md`, `smx-admin/README.md`).
